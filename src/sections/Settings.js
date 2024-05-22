@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import LandingPage from '../components/LandingPage';
+// import LandingPage from '../components/LandingPage';
 
 export default function App ({ onLogout }) {
     // const [isLoggedIn, setIsLoggedIn] = useState(true);

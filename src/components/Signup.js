@@ -58,7 +58,7 @@ export default function Signup({ onSwitchToLogin, onSignup  }) {
                     </div>
                     <button type="submit" className="btn-signup">Sign Up</button>
                     <div className="login-link">
-                        <p>Already have an account? <a href="#" onClick={onSwitchToLogin}>Login</a></p>
+                        <p>Already have an account? <a onClick={onSwitchToLogin}>Login</a></p>
                     </div>
                 </form>
             </div>

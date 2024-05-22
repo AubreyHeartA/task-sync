@@ -12,9 +12,9 @@ export default function App ({ onLogout }) {
         window.open("mailto:studymate.project101@gmail.com").focus();
     };
 
-    const handleLogout = () => {
-        setIsLoggedIn(false);
-    };
+    // const handleLogout = () => {
+    //     setIsLoggedIn(false);
+    // };
 
     if (!isLoggedIn) {
         return <LandingPage />;

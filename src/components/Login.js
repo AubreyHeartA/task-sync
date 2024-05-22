@@ -70,7 +70,7 @@ const Login = ({ onSwitchToSignup, onLogin }) => {
                     <Button className="forgot-password-link" onClick={handleForgotPassword}>Forgot Password?</Button>
                 </div>
                 <div className="signup-link">
-                    <p>Don't have an account? <a href="#" onClick={onSwitchToSignup}>Sign Up</a></p>
+                    <p>Don't have an account? <a href="#signup" onClick={onSwitchToSignup}>Sign Up</a></p>
                 </div>
             </form>
         </div>

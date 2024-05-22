@@ -1,0 +1,67 @@
+import React, { useState } from 'react';
+import logo from '../assets/tasksync.png';
+import '../config/style.css';
+export default function Signup({ onSwitchToLogin, onSignup  }) {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
+    const handleSignup = (e) => {
+        e.preventDefault();
+        // Handle signup logic here
+        onSignup();
+    };
+
+    return (
+        <div>
+            <div className='header'>
+                <div className='logo-container'>
+                    <img className="image" src={logo} alt="tasksync logo" />
+                </div>
+            </div>
+
+            <div className="form-container">
+                <form onSubmit={handleSignup} className="form">
+                    <div className='text'>
+                        <h2>Create an Account</h2>
+                        <p>Enter your details to create an account</p>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            value={email} 
+                            onChange={(e) => setEmail(e.target.value)} 
+                            required 
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            value={password} 
+                            onChange={(e) => setPassword(e.target.value)} 
+                            required 
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="confirmPassword">Confirm Password</label>
+                        <input 
+                            type="password" 
+                            id="confirmPassword" 
+                            value={confirmPassword} 
+                            onChange={(e) => setConfirmPassword(e.target.value)} 
+                            required 
+                        />
+                    </div>
+                    <button type="submit" className="btn-signup">Sign Up</button>
+                    <div className="login-link">
+                        <p>Already have an account? <a href="#" onClick={onSwitchToLogin}>Login</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
+}

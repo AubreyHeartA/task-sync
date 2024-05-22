@@ -1,0 +1,696 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.body {     
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    height: 90%;
+    /* background-color: #3e8e41; */
+}
+
+.article {
+    padding: 40px;
+    width: 100%;
+}
+
+
+/* LOGIN */
+
+.logo-container {
+    width: 100%;
+}
+
+.image {
+    width: 190px;
+    height: 50px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.form {
+    /* max-width: 600px; */
+    padding: 25px 35px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    /* height: 95%; */
+}
+
+.form h2 {
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: -10px;
+}
+
+.form .text {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+.form p, a {
+    font-size: 15px;
+}
+
+.form-group.remember-me{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0.5em;
+}
+
+.forgot-password, 
+.signup-link,
+.login-link {
+    display: flex;
+    justify-content: center;
+}
+
+input[type="email"],
+input[type="password"] 
+{
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid black;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    border-radius: 5px;
+    /* background-color: #f5f5f5; */
+
+}
+
+Button[type="submit"] {
+    display: block;
+    width: 100%;
+    background-color: #00BF63;
+    border-radius: 15px;
+    margin: 20px auto;
+}
+
+
+/* SIGNUP */
+
+.signup-form h2 {
+    margin-bottom: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn-signup {
+    background-color: #007bff;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-signup:hover {
+    background-color: #0056b3;
+}
+
+
+/* HEADER */
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px;
+    background-color: #f5f5f5;
+}
+  
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid #ccc; */
+    /* background-color: #555; */
+    border-radius: 4px;
+    padding: 4px;
+    gap: 1em;
+    width: 35%;
+}
+
+.search-container input[type="text"] {
+    border: none;
+    outline: none;
+    padding: 8px;
+    width: 100%;
+}
+
+.btn-search {
+    background-color: green;
+    color: #fff;
+    padding: 7px 13px;
+}
+
+.left {
+    display: flex;
+    column-gap: 2em;
+    margin-right: 25px;
+}
+
+.getApp-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.getApp-button:hover {
+    background-color: #3e8e41;
+}
+
+img {
+    width: 40px;
+    height: 40px;
+}
+
+.sidebar {
+    width: 200px;
+    height: 100%;
+    /* background-color: #333; */
+    color: #000;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin-bottom: 10px;
+    cursor: pointer;
+    gap: 5px;
+    display: flex;
+    padding: 3px 15px;
+}
+
+.sidebar li.active {
+    background-color: #4CAF50; /* Change background color when active */
+    color: #fff;
+}
+
+.sidebar li:hover {
+    font-weight: 600;
+}
+
+/* DASHBOARD */
+.dashboard-section {
+    padding: 20px;
+}
+
+
+/* NEW TASK CSS */
+
+.new-task {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+}
+
+.newTask-text {
+    margin-bottom: 10px; 
+}
+
+.error {
+    color: red;
+    margin-bottom: 10px;
+}
+
+.task-type {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.task-type button {
+    flex: 1;
+    margin: 0 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #e0e0e0;
+    cursor: pointer;
+}
+
+input[type="text"], 
+input[type="date"], 
+input[type="time"], 
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.category-section {
+    display: flex;
+    flex-direction: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.category-section select {
+    flex: 2;
+}
+
+.select-delete-category .delete-btn, 
+.new-category .add-btn {
+    flex: 1;
+    margin: 0 5px;
+    padding: 5px 35px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.category-section .delete-btn {
+    background: #ff6666;
+}
+
+.category-section .add-btn {
+    background: #66cc66;
+}
+
+.category-colors {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+}
+
+.priority-section {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+}
+
+.priority-section button {
+    flex: 1;
+    margin: 0 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.priority-section button.active {
+    background: #ddd;
+}
+
+.selected-category {
+    /* display: flex; */
+    width: 100%;
+}
+
+.select-delete-category, 
+.new-category {
+    display: flex;
+    flex-direction: row;
+    width: 100%
+
+}
+
+/* 
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+} */
+/* 
+.action-buttons .cancel-btn, 
+.action-buttons .create-btn {
+    flex: 1;
+    margin: 0 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+} */
+
+/* .action-buttons .cancel-btn {
+    background: #ff6666;
+} */
+
+/* .action-buttons .create-btn {
+    background: #66cc66;
+} */
+
+.btn-addTask {
+    background-color: #00BF63;
+    float: right;
+}
+
+.task-filter select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    width: 130px;
+}
+
+.category-tabs {
+    margin-bottom: 20px;
+}
+
+.category-tabs button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: 1px solid green;
+    background-color: white;
+    color: black;
+}
+
+.category-tabs button.active {
+    font-weight: bold;
+    border-bottom: 2px solid #000;
+}
+
+.cancel-btn {
+    background-color: #D24545;
+}
+.createTask-btn {
+    background-color: #00BF63;
+}
+
+/* TAB.CSS */
+
+.task {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* width: 340%;s */
+}
+
+.task-item {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    width: 100%;
+    font-size: 15px;
+}
+
+.task-item h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.task-item p {
+    margin: 5px 0;
+    color: #000;
+}
+
+.task-item .red-color {
+    color: red;
+}
+
+.task-item .task-details {
+    /* background-color: #3e8e41; */
+    width: 200%;
+}
+
+.task-item .task-actions {
+    display: flex;
+    gap: 10px;
+    /* margin-left: 45em; */
+    /* margin-top: 10px; */
+}
+
+.task-item .task-actions svg {
+    cursor: pointer;
+    color: #888;
+    transition: color 0.3s;
+}
+
+.task-item .task-actions svg:hover {
+    color: #000;
+}
+
+
+/* .priority-label {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+} */
+
+.low-priority {
+    background-color: #01da01;
+    border-radius: 10px;
+    width: 100px;
+    text-align: center;
+    color: white;
+    font-weight: 400;
+    padding: 5px 10px;
+}
+
+.medium-priority {
+    background-color: #e4c410;
+    border-radius: 10px;
+    width: 100px;
+    text-align: center;
+    color: white;
+    font-weight: 400;
+    padding: 5px 10px;
+}
+
+.high-priority {
+    color: red;
+    background-color: red;
+    border-radius: 10px;
+    width: 100px;
+    text-align: center;
+    padding: 5px 10px;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.task-item .bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* background-color: #000; */
+}
+
+.task-item .blue-color {
+    color: #004a99;
+    font-size: 14px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* SETTINGS */
+
+.settings-section .chat,
+.settings-section .report {
+    width: 100%;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.settings-section .chat:hover,
+.settings-section .report:hover,
+.settings-section .logout:hover {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+}
+
+.settings-section hr {
+    opacity: rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.settings-section .logout {
+    background-color: #D24545;
+    color: #fff;
+    text-align: center;
+    width: 30%;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.settings-section p {
+    color: rgb(0, 0, 0, 0.5);
+    font-size: 14px;
+    text-align: center;
+    margin-top: 5em;
+}
+
+/* LANDINGPAGE */
+
+/* config/style.css */
+
+/* Full page styles for LandingPage */
+.App {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100vw;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+}
+
+.nav-links {
+    list-style-type: none;
+    display: flex;
+    gap: 15px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.get-started-btn, .get-app-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.App-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex: 1;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+.header-content {
+    max-width: 600px;
+}
+
+.header-content h1 {
+    font-size: 3em;
+}
+
+.header-content p {
+    font-size: 1.5em;
+    color: #666;
+}
+
+.header-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.get-started-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.get-started-button:hover {
+    background-color: #0056b3;
+}
+
+/* Settings section styles */
+.settings-section {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.chat, .report, .logout {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.chat:hover, .report:hover, .logout:hover {
+    background-color: #0056b3;
+}
+
+hr {
+    margin: 20px 0;
+}
+
+p {
+    margin-top: 20px;
+    color: #333;
+}

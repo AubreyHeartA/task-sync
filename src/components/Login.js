@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
 import logo from '../assets/tasksync.png';
 import '../config/style.css'
 
@@ -66,7 +67,7 @@ const Login = ({ onSwitchToSignup, onLogin }) => {
                 </div>
                 <button type="submit" className="btn-login">Login</button>
                 <div className="forgot-password">
-                    <a onClick={handleForgotPassword}>Forgot Password?</a>
+                    <Button className="forgot-password-link" onClick={handleForgotPassword}>Forgot Password?</Button>
                 </div>
                 <div className="signup-link">
                     <p>Don't have an account? <a href="#" onClick={onSwitchToSignup}>Sign Up</a></p>

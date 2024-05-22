@@ -81,6 +81,17 @@
     justify-content: center;
 }
 
+.forgot-password-link {
+    background-color: #fff;
+    color: #000;
+}
+
+.forgot-password-link:hover {
+    background-color: #fff;
+    color: red;
+}
+
+
 input[type="email"],
 input[type="password"] 
 {
@@ -140,6 +151,17 @@ Button[type="submit"] {
     background-color: #0056b3;
 }
 
+.login-link-btn {
+  background-color: #fff;
+  color: blue;
+  padding: 0 0;  
+}
+
+.login-link-btn:hover {
+    background-color: #fff;
+    color: blue;
+    padding: 0 0;  
+}
 
 /* HEADER */
 
@@ -587,9 +609,6 @@ button:hover {
 
 /* LANDINGPAGE */
 
-/* config/style.css */
-
-/* Full page styles for LandingPage */
 .App {
     display: flex;
     flex-direction: column;
@@ -657,7 +676,6 @@ button:hover {
     color: #666;
 }
 
-
 .header-image {
     /* display: flex; */
     justify-content: center;
@@ -684,34 +702,3 @@ button:hover {
 .get-started-button:hover {
     background-color: #0056b3;
 }
-
-/* Settings section styles */
-/* .settings-section {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.chat, .report, .logout {
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.chat:hover, .report:hover, .logout:hover {
-    background-color: #0056b3;
-}
-
-hr {
-    margin: 20px 0;
-}
-
-p {
-    margin-top: 20px;
-    color: #333;
-} */

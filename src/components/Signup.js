@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+
 import logo from '../assets/tasksync.png';
 import '../config/style.css';
 export default function Signup({ onSwitchToLogin, onSignup  }) {
@@ -58,7 +60,7 @@ export default function Signup({ onSwitchToLogin, onSignup  }) {
                     </div>
                     <button type="submit" className="btn-signup">Sign Up</button>
                     <div className="login-link">
-                        <p>Already have an account? <a onClick={onSwitchToLogin}>Login</a></p>
+                        <p>Already have an account? <Button className="login-link-btn" onClick={onSwitchToLogin}>Login</Button></p>
                     </div>
                 </form>
             </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import LandingPage from '../components/LandingPage';
 
 export default function App ({ onLogout }) {
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    // const [isLoggedIn, setIsLoggedIn] = useState(true);
 
     const chatWithUs = () => {
         window.open("https://m.me/claricedomingo07", "_blank").focus();
@@ -16,9 +16,9 @@ export default function App ({ onLogout }) {
     //     setIsLoggedIn(false);
     // };
 
-    if (!isLoggedIn) {
-        return <LandingPage />;
-    }
+    // if (!isLoggedIn) {
+    //     return <LandingPage />;
+    // }
     
     return (
         <div className='settings-section'>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MdHome, MdInfo, MdSettings } from 'react-icons/md';
+
 import '../config/style.css';
 import Header from './Header';
 import Sidebar from './Sidebar';

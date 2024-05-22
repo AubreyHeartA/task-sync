@@ -55,7 +55,7 @@ export default function Dashboard({ ongoingTasks, completedTasks, taskDetails })
                         </div>
                     ))
                 )} */}
-            </div>
+            {/* </div> */}
         </div>
     );
 }

@@ -163,7 +163,7 @@ export default function Task({ searchTerm, taskDetails, setTaskDetails }) {
                         </>
                     ) : (
                         <div className='empty'>
-                            <img className='empty-image' src={empty} />
+                            <img className='empty-image' src={empty} alt="empty" />
                         </div>
                     )}
                 </>

@@ -599,42 +599,53 @@ button:hover {
 
 .navbar {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
+    padding: 15px 30px;
+    background-color: #f5f5f5;
 }
 
 .nav-links {
     list-style-type: none;
     display: flex;
-    gap: 15px;
+    gap: 2em;
 }
 
 .nav-links a {
-    color: white;
+    color: black;
     text-decoration: none;
 }
 
 .get-started-btn, .get-app-btn {
-    background-color: #007bff;
+    background-color: #00BF63;
     color: white;
     padding: 10px;
     border-radius: 5px;
     text-decoration: none;
+    margin-top: 30px;
+}
+
+.get-started-btn:hover,
+.get-app-btn:hover {
+    color: #fff;
+
 }
 
 .App-header {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: center;
+    align-items: center; 
     flex: 1;
     padding: 20px;
-    background-color: #f0f0f0;
 }
 
 .header-content {
+    display: flex;
+    flex-direction: column;
+    /* align-content: space-around; */
+    align-items: last baseline;
     max-width: 600px;
+    gap: 2em;
 }
 
 .header-content h1 {
@@ -642,17 +653,27 @@ button:hover {
 }
 
 .header-content p {
-    font-size: 1.5em;
+    font-size: 20px;
     color: #666;
 }
 
-.header-image img {
-    max-width: 100%;
-    height: auto;
+
+.header-image {
+    /* display: flex; */
+    justify-content: center;
+    /* background-color: #000; */
+    padding: 5px 5px;
+    width: 30%;
+    height: 60%;
+}
+
+.header-image .photo {
+    width: 50%;
+    height: 20%;
 }
 
 .get-started-button {
-    background-color: #007bff;
+    background-color: #00BF63;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -665,7 +686,7 @@ button:hover {
 }
 
 /* Settings section styles */
-.settings-section {
+/* .settings-section {
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 5px;
@@ -693,4 +714,4 @@ hr {
 p {
     margin-top: 20px;
     color: #333;
-}
+} */

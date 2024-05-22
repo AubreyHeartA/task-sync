@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
-import logo from '../assets/tasksync.png';
+import logo from '../assets/TaskSync1.png';
 import '../config/style.css';
 export default function Signup({ onSwitchToLogin, onSignup  }) {
     const [email, setEmail] = useState('');
@@ -16,9 +16,10 @@ export default function Signup({ onSwitchToLogin, onSignup  }) {
 
     return (
         <div>
-            <div className='header'>
-                <div className='logo-container'>
-                    <img className="image" src={logo} alt="tasksync logo" />
+            <div className="navbar">
+                <div className="logo">
+                    <img className='logo-photo' src={logo} alt="TaskSync Logo" />
+                    <h2>TaskSync</h2>
                 </div>
             </div>
 

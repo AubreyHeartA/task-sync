@@ -17,6 +17,7 @@ const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLogin, setIsLogin] = useState(true);
     const [isLandingPage, setIsLandingPage] = useState(true);
+    const [taskDetails, setTaskDetails] = useState([]);
 
     const handleItemClick = (item) => {
         setSelectedItem(item);
@@ -72,6 +73,14 @@ const App = () => {
         );
     }
 
+    
+    const countTasksByStatus = (status) => {
+        return taskDetails.filter(task => task.status === status).length;
+    };
+
+    const ongoingTasks = countTasksByStatus('Pending');
+    const completedTasks = countTasksByStatus('Completed');
+
     const sidebarItems = [
         { label: 'Dashboard', icon: <MdHome /> },
         { label: 'Tasks', icon: <MdInfo /> },
@@ -88,8 +97,8 @@ const App = () => {
                     selectedItem={selectedItem}
                 />
                 <div className="article">
-                    {selectedItem === 'Dashboard' && <Dashboard />}
-                    {selectedItem === 'Tasks' && <Task searchTerm={searchTerm} />}
+                    {selectedItem === 'Dashboard' && <Dashboard ongoingTasks={ongoingTasks} completedTasks={completedTasks} taskDetails={taskDetails} />}
+                    {selectedItem === 'Tasks' && <Task searchTerm={searchTerm} taskDetails={taskDetails} setTaskDetails={setTaskDetails}  />}
                     {selectedItem === 'Settings' && <Settings onLogout={handleLogout} />}
                 </div>
             </div>

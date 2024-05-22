@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import { MdDelete, MdEdit } from "react-icons/md";
-import '../config/style.css';
 
-export default function Task({ searchTerm }) {
+import '../config/style.css';
+import empty from '../assets/Empty.png';
+
+export default function Task({ searchTerm, taskDetails, setTaskDetails }) {
     const [showNewTask, setShowNewTask] = useState(false);
-    const [taskDetails, setTaskDetails] = useState([]);
     const [editTask, setEditTask] = useState(null);
     const [filter, setFilter] = useState('All');
     const [selectedCategory, setSelectedCategory] = useState('All');
@@ -15,7 +16,7 @@ export default function Task({ searchTerm }) {
         if (savedTasks) {
             setTaskDetails(savedTasks);
         }
-    }, []);
+    }, [setTaskDetails]);
 
     const handleAddTaskClick = () => {
         setShowNewTask(true);
@@ -45,6 +46,9 @@ export default function Task({ searchTerm }) {
         const updatedTasks = taskDetails.filter((_, i) => i !== index);
         setTaskDetails(updatedTasks);
         localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+        if (selectedCategory !== 'All' && !updatedTasks.some(task => task.category === selectedCategory)) {
+            setSelectedCategory('All');
+        }
     };
 
     const handleEditTask = (index) => {
@@ -90,13 +94,10 @@ export default function Task({ searchTerm }) {
     };
 
     const getUniqueCategories = () => {
-        const categories = ['All'];
-        taskDetails.forEach(task => {
-            if (!categories.includes(task.category)) {
-                categories.push(task.category);
-            }
-        });
-        return categories;
+        const categories = taskDetails
+            .map(task => task.category)
+            .filter((category, index, self) => self.indexOf(category) === index && taskDetails.some(task => task.category === category));
+        return ['All', ...categories];
     };
 
     const filteredTasks = taskDetails.filter(task => 
@@ -109,60 +110,68 @@ export default function Task({ searchTerm }) {
 
     return (
         <div className='task-section'>
+            <Button className="btn-addTask" type="button" onClick={handleAddTaskClick}>Add task</Button>
             {!showNewTask && (
                 <>
-                    <Button className="btn-addTask" type="button" onClick={handleAddTaskClick}>Add task</Button>
-                    
-                    <div className="task-filter">
-                        <select value={filter} onChange={handleFilterChange}>
-                            <option value="All">All</option>
-                            <option value="Pending">Pending</option>
-                            <option value="Completed">Completed</option>
-                        </select>
-                    </div>
-                    <div className="category-tabs">
-                        {getUniqueCategories().map((category, index) => (
-                            <button
-                                key={index}
-                                className={selectedCategory === category ? 'active' : ''}
-                                onClick={() => handleCategoryChange(category)}
-                            >
-                                {category}
-                            </button>
-                        ))}
-                    </div>
-                    <div className='task'>
-                        {filteredTasks.map((task, index) => (
-                            <div key={index} className="task-item">
-                                <input 
-                                    type="checkbox" 
-                                    checked={task.status === 'Completed'} 
-                                    onChange={() => handleToggleTaskStatus(index)} 
-                                />
-                                <div className="task-details">
-                                    <h3>{task.title}</h3>
-                                    <p>{task.description}</p>
-                                    <p className='red-color'>Due Date: {task.dueDate} {task.dueTime}</p>
-                                    <p>Member: {task.member}</p>
-                                    <div className='bottom'>
-                                        <h4 className={getPriorityClass(task.priority)}>{task.priority}</h4>
-                                        <p className='blue-color'>Date Created: {formatDate(task.createdAt)}</p>
-                                    </div>
-                                </div>
-                                <div className="task-actions">
-                                    <MdEdit onClick={() => handleEditTask(index)} />
-                                    <MdDelete onClick={() => handleDeleteTask(index)} />
-                                </div>
+                    {taskDetails.length > 0 ? (
+                        <>
+                            <div className="task-filter">
+                                <select value={filter} onChange={handleFilterChange}>
+                                    <option value="All">All</option>
+                                    <option value="Pending">Pending</option>
+                                    <option value="Completed">Completed</option>
+                                </select>
                             </div>
-                        ))}
-                    </div>
+                            {getUniqueCategories().length > 1 && (
+                                <div className="category-tabs">
+                                    {getUniqueCategories().map((category, index) => (
+                                        <button
+                                            key={index}
+                                            className={selectedCategory === category ? 'active' : ''}
+                                            onClick={() => handleCategoryChange(category)}
+                                        >
+                                            {category}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+                            <div className='task'>
+                                {filteredTasks.map((task, index) => (
+                                    <div key={index} className="task-item">
+                                        <input 
+                                            type="checkbox" 
+                                            checked={task.status === 'Completed'} 
+                                            onChange={() => handleToggleTaskStatus(index)} 
+                                        />
+                                        <div className="task-details">
+                                            <h3>{task.title}</h3>
+                                            <p>{task.description}</p>
+                                            <p className='red-color'>Due Date: {task.dueDate} {task.dueTime}</p>
+                                            <p>Member: {task.member}</p>
+                                            <div className='bottom'>
+                                                <h4 className={getPriorityClass(task.priority)}>{task.priority}</h4>
+                                                <p className='blue-color'>Date Created: {formatDate(task.createdAt)}</p>
+                                            </div>
+                                        </div>
+                                        <div className="task-actions">
+                                            <MdEdit onClick={() => handleEditTask(index)} />
+                                            <MdDelete onClick={() => handleDeleteTask(index)} />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </>
+                    ) : (
+                        <div className='empty'>
+                            <img className='empty-image' src={empty} />
+                        </div>
+                    )}
                 </>
             )}
             {showNewTask && <NewTask onCancel={handleCancel} onCreate={handleCreateTask} editTask={editTask !== null ? taskDetails[editTask] : null} />}
         </div>
     );
 };
-
 
 const NewTask = ({ onCancel, onCreate, editTask }) => {
     const [taskTitle, setTaskTitle] = useState(editTask ? editTask.title : '');

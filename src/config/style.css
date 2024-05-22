@@ -25,15 +25,6 @@
 
 /* LOGIN */
 
-.logo-container {
-    width: 100%;
-}
-
-.image {
-    width: 190px;
-    height: 50px;
-}
-
 .form-container {
     display: flex;
     flex-direction: column;
@@ -53,7 +44,7 @@
 .form h2 {
     font-weight: 600;
     text-align: center;
-    margin-bottom: -10px;
+    /* margin-bottom: 0; */
 }
 
 .form .text {
@@ -171,6 +162,9 @@ Button[type="submit"] {
     justify-content: space-between;
     padding: 4px;
     background-color: #f5f5f5;
+    /* position: sticky;
+    top: 0; */
+    /* z-index: 1; */
 }
   
 .search-container {
@@ -256,9 +250,57 @@ img {
     font-weight: 600;
 }
 
+
 /* DASHBOARD */
+.welcome {
+    text-align: center;
+}
+
 .dashboard-section {
     padding: 20px;
+}
+
+.task-list {
+    margin-top: 30px;
+}
+
+.task-list h3 {
+    margin-bottom: 20px;
+}
+
+.task-item {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.task-details h3 {
+    margin: 0 0 10px;
+}
+
+.task-details p {
+    margin: 5px 0;
+}
+
+.task-details .bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.high-priority {
+    color: red;
+}
+
+.medium-priority {
+    color: orange;
+}
+
+.low-priority {
+    color: green;
 }
 
 
@@ -323,6 +365,8 @@ select {
 .select-delete-category .delete-btn, 
 .new-category .add-btn {
     flex: 1;
+    align-items: center;
+    /* justify-content: center; */
     margin: 0 5px;
     padding: 5px 35px;
     height: 50px;
@@ -333,6 +377,8 @@ select {
 
 .category-section .delete-btn {
     background: #ff6666;
+    padding: 5px 20px;
+    /* height: auto; */
 }
 
 .category-section .add-btn {
@@ -526,7 +572,7 @@ select {
 }
 
 .high-priority {
-    color: red;
+    color: white;
     background-color: red;
     border-radius: 10px;
     width: 100px;
@@ -563,6 +609,20 @@ button {
 
 button:hover {
     background-color: #0056b3;
+}
+
+.empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 50%;
+    /* background-color: #004a99; */
+}
+
+.empty-image {
+    width: 70%;
+    height: auto;
 }
 
 /* SETTINGS */
@@ -616,6 +676,11 @@ button:hover {
     width: 100vw;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+}
+
 .navbar {
     display: flex;
     align-items: center;
@@ -652,6 +717,7 @@ button:hover {
 
 .App-header {
     display: flex;
+    flex-direction: row;
     flex: 1;
     justify-content: space-around;
     align-items: center;
@@ -677,16 +743,14 @@ button:hover {
 }
 
 .header-image {
-    /* display: flex; */
+    display: flex;
     justify-content: center;
-    /* background-color: #000; */
-    padding: 5px 5px;
-    width: 30%;
+    width: 45%;
     height: 60%;
 }
 
 .header-image .photo {
-    width: 50%;
+    width: 70%;
     height: 20%;
 }
 

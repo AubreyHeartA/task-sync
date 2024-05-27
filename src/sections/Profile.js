@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap"; // Import Button from react-bootstrap
 import { MdAccountCircle, MdOutlineMessage, MdOutlineReportGmailerrorred } from "react-icons/md";
-import '../config/style.css'; 
+
+import profile from '../assets/TaskSync1.png';
+import '../config/style.css';
 
 const Profile = ({ navigation }) => {
     const [isEditMode, setIsEditMode] = useState(false);
@@ -45,14 +47,20 @@ const Profile = ({ navigation }) => {
 
             setIsEditMode(false);
             alert('Profile Updated', 'Your profile has been successfully updated.');
-            
         } catch (error) {
             console.error('Error updating profile:', error);
         }
     };
 
-    const selectProfilePhoto = async () => {
-        // Implement image picker logic for web, this could be done using <input type="file" /> or some external library
+    const selectProfilePhoto = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setProfilePhoto(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
     };
 
     const chatWithUs = () => {
@@ -75,16 +83,25 @@ const Profile = ({ navigation }) => {
     return (
         <div className="profile-section">
             <div className="profileContainer">
-                <div className="selectProfilePhoto" onClick={selectProfilePhoto} >
-                    {profilePhoto ? (
-                        <MdAccountCircle className="profileImage" />
-                    ) : (
-                        <MdAccountCircle className="profileImage"  />
-                    )}
+                <div className="selectProfilePhoto">
+                    <input 
+                        type="file"
+                        accept="image/*"
+                        onChange={selectProfilePhoto}
+                        style={{ display: 'none' }}
+                        id="profilePhotoInput"
+                    />
+                    <label htmlFor="profilePhotoInput">
+                        {profilePhoto ? (
+                            <img src={profilePhoto} alt="Profile" className="profileImage" />
+                        ) : (
+                            <img src={profile} alt="Blank Profile" className="profileImage" />
+                        )}
+                    </label>
                 </div>
                 <p className="greetings">Hello, {firstname} {lastname}!</p>
             </div>
-            
+
             <div className="information-actions">
                 {!isEditMode ? (
                     <div className="accountInfoContainer">
@@ -118,7 +135,7 @@ const Profile = ({ navigation }) => {
                                 disabled
                             />
                         </div>
-                        
+
                         <div className="updatebtn-container">
                             <Button className="updateButton" onClick={() => setIsEditMode(true)}>
                                 <span className="updateButtonText">Edit Profile</span>
@@ -165,7 +182,7 @@ const Profile = ({ navigation }) => {
                         </div>
                     </div>
                 )}
-                
+
                 <div className="actionsContainer">
                     <p className="sectionHeader">Actions:</p>
                     <div className="actions-list">
@@ -173,17 +190,13 @@ const Profile = ({ navigation }) => {
                             <MdOutlineMessage />
                             <span className="actionsItem">Chat With Us</span>
                         </div>
-                        
+
                         <hr className="actions-line" />
-                        
+
                         <div className="actions" onClick={reportIssue}>
                             <MdOutlineReportGmailerrorred />
                             <span className="actionsItem">Report an Issue</span>
                         </div>
-                        {/* <hr className="actions-line" />
-                        <div className="actions">
-                            <span className="actionsItem">Version 1.0.0</span>
-                        </div> */}
                     </div>
                 </div>
             </div>

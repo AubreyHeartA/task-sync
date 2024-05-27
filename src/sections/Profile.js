@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap"; // Import Button from react-bootstrap
-import { MdAccountCircle, MdOutlineMessage, MdOutlineReportGmailerrorred } from "react-icons/md";
+import { MdOutlineMessage, MdOutlineReportGmailerrorred } from "react-icons/md";
 
 import profile from '../assets/TaskSync1.png';
 import '../config/style.css';

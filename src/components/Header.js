@@ -1,12 +1,17 @@
 import React from 'react';
 import { MdAccountCircle } from "react-icons/md";
 import Button from 'react-bootstrap/Button';
+
 import '../config/style.css';
 
-export default function Header({ searchTerm, setSearchTerm }) {
+export default function Header({ searchTerm, setSearchTerm, onProfileClick  }) {
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
+
+    const getApp = () => {
+        window.open("https://www.mediafire.com/file/9qmqxp2up7tjbv4/TaskSync.apk/file", "_blank").focus();
+    };
 
   return (
     <div className="header">
@@ -15,16 +20,19 @@ export default function Header({ searchTerm, setSearchTerm }) {
         </div>
         <div className="search-container">
             <input
-            type="text"
-            placeholder="Search tasks, members, projects"
-            value={searchTerm}
-            onChange={handleSearch}
+                className="search"
+                type="text"
+                placeholder="Search tasks, members, projects"
+                value={searchTerm}
+                onChange={handleSearch}
             />
             <Button className="btn-search">Search</Button>
         </div>
         <div className='left'> 
-            <MdAccountCircle size={40} />
+            <a className="getApp" href="#get-app" onClick={getApp}>Get App</a>
+            <MdAccountCircle size={40} onClick={onProfileClick} />
         </div>
+        
     </div>
   );
 };

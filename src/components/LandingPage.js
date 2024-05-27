@@ -17,9 +17,9 @@ function LandingPage({ onSwitchToLogin, onSwitchToSignup }) {
                     <h2>TaskSync</h2>
                 </div>
                 <ul className="nav-links">
-                    <li><a href="#login" onClick={onSwitchToLogin}>Log In</a></li>
-                    <li><a href="#get-started" className="get-started-btn" onClick={onSwitchToSignup}>Get Started</a></li>
-                    <li><a href="#get-app" onClick={getApp} className="get-app-btn">Get App</a></li>
+                    <li><a className="log-in-link" href="#login" onClick={onSwitchToLogin}>Log In</a></li>
+                    <li><a className="get-started-btn" href="#get-started" onClick={onSwitchToSignup}>Get Started</a></li>
+                    <li><a className="get-app-btn" href="#get-app" onClick={getApp}>Get App</a></li>
                 </ul>
             </nav>
             <div className="App-header">

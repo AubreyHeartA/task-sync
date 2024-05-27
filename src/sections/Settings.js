@@ -30,11 +30,6 @@ export default function App ({ onLogout }) {
                 <span>Report an Issue</span>
             </div>
 
-            <hr />
-            <div className="logout" onClick={onLogout}>
-                <span>Logout</span>
-            </div>
-            <p>TaskSync &copy; 2024</p>
         </div>
     );
 };

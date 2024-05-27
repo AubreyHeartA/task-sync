@@ -163,7 +163,8 @@ export default function Task({ searchTerm, taskDetails, setTaskDetails }) {
                         </>
                     ) : (
                         <div className='empty'>
-                            <img className='empty-image' src={empty} alt="empty" />
+                            <img className='empty-image' src={empty} alt="No tasks available" />
+                            <p>No tasks available.</p>
                         </div>
                     )}
                 </>
@@ -220,15 +221,19 @@ const NewTask = ({ onCancel, onCreate, editTask }) => {
 
     const handleAddCategory = () => {
         if (newCategory && !categories.includes(newCategory)) {
-            setCategories([...categories, newCategory]);
+            const updatedCategories = [...categories, newCategory];
+            setCategories(updatedCategories);
             setCategory(newCategory);
             setNewCategory('');
+            localStorage.setItem('categories', JSON.stringify(updatedCategories)); // Save categories to local storage
         }
     };
 
     const handleDeleteCategory = () => {
-        setCategories(categories.filter(cat => cat !== category));
+        const updatedCategories = categories.filter(cat => cat !== category);
+        setCategories(updatedCategories);
         setCategory('');
+        localStorage.setItem('categories', JSON.stringify(updatedCategories)); // Save categories to local storage
     };
 
     const handleCategorySelect = (e) => {
@@ -257,7 +262,7 @@ const NewTask = ({ onCancel, onCreate, editTask }) => {
             <div className="category-section">
                 {category && (
                     <div className="selected-category">
-                        <span style={{ fontSize: "15px" }}>Selected Category: <p style={{ fontWeight: "600", color: "#00BF63" }}>{category}</p></span>
+                        <span className='category' style={{ fontSize: "15px" }}>Selected Category:  <p style={{ fontWeight: "600", color: "#00BF63" }}>{category}</p></span>
                     </div>
                 )}
                 <div className='select-delete-category'>
@@ -272,6 +277,7 @@ const NewTask = ({ onCancel, onCreate, editTask }) => {
                     </select>
                     {category && <Button className="delete-btn" onClick={handleDeleteCategory}>Delete</Button>}
                 </div>
+
                 <div className='new-category'>
                     <input 
                         type="text" 

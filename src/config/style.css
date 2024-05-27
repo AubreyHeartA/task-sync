@@ -14,7 +14,6 @@
     display: flex;
     flex-direction: row;
     height: 90%;
-    /* background-color: #3e8e41; */
 }
 
 .article {
@@ -30,21 +29,20 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: auto;
+    margin-top: 30px
+
 }
 
 .form {
-    /* max-width: 600px; */
     padding: 25px 35px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     width: 400px;
-    /* height: 95%; */
 }
 
 .form h2 {
     font-weight: 600;
     text-align: center;
-    /* margin-bottom: 0; */
 }
 
 .form .text {
@@ -56,6 +54,11 @@
 
 .form p, a {
     font-size: 15px;
+}
+
+.form a {
+    text-decoration: none;
+    color: #2ECC71;
 }
 
 .form-group.remember-me{
@@ -82,7 +85,7 @@
     color: red;
 }
 
-
+input[type="text"],
 input[type="email"],
 input[type="password"] 
 {
@@ -92,8 +95,6 @@ input[type="password"]
     border: 1px solid black;
     /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
     border-radius: 5px;
-    /* background-color: #f5f5f5; */
-
 }
 
 Button[type="submit"] {
@@ -142,10 +143,11 @@ Button[type="submit"] {
     background-color: #0056b3;
 }
 
-.login-link-btn {
+.login-link-btn, .signup-link-btn {
   background-color: #fff;
-  color: blue;
+  color: #2ECC71;
   padding: 0 0;  
+  cursor: pointer;
 }
 
 .login-link-btn:hover {
@@ -160,42 +162,53 @@ Button[type="submit"] {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 4px;
+    align-items: center;
+    padding: 0 20px;
     background-color: #f5f5f5;
-    /* position: sticky;
-    top: 0; */
-    /* z-index: 1; */
 }
   
 .search-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: 1px solid #ccc; */
-    /* background-color: #555; */
     border-radius: 4px;
-    padding: 4px;
+    padding: 10px 5px;
     gap: 1em;
-    width: 35%;
+    width: 50%;
 }
 
-.search-container input[type="text"] {
+.search-container .search-field {
     border: none;
+    border-radius: 20px;
     outline: none;
     padding: 8px;
     width: 100%;
 }
 
 .btn-search {
-    background-color: green;
+    background-color: #00BF63;
     color: #fff;
-    padding: 7px 13px;
+    padding: 10px 30px;
 }
 
-.left {
+.header .left {
     display: flex;
+    align-items: center;
     column-gap: 2em;
     margin-right: 25px;
+}
+
+.left .getApp {
+    background-color: #00BF63;
+    color: #fff;
+    padding: 5px 30px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.left a {
+    text-decoration: none;
+    font-size: 14px;
 }
 
 .getApp-button {
@@ -219,7 +232,6 @@ img {
 .sidebar {
     width: 200px;
     height: 100%;
-    /* background-color: #333; */
     color: #000;
     padding: 20px;
 }
@@ -257,40 +269,49 @@ img {
 }
 
 .dashboard-section {
+    text-align: center;
     padding: 20px;
 }
 
-.task-list {
-    margin-top: 30px;
-}
-
-.task-list h3 {
+.welcome {
+    font-size: 24px;
     margin-bottom: 20px;
 }
 
-.task-item {
-    background-color: #f9f9f9;
-    padding: 15px;
+.task-summary {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.task-count-completed {
+    background-color: #00BF63;
+    padding: 20px;
     border-radius: 10px;
-    margin-bottom: 20px;
+    width: 150px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.task-details h3 {
-    margin: 0 0 10px;
+.task-count-pending {
+    background-color: red;
+    padding: 20px;
+    border-radius: 10px;
+    width: 150px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.task-details p {
-    margin: 5px 0;
+.task-count h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
 }
 
-.task-details .bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
+.task-count p {
+    font-size: 24px;
+    font-weight: bold;
 }
 
+
+/* 
 .high-priority {
     color: red;
 }
@@ -301,7 +322,7 @@ img {
 
 .low-priority {
     color: green;
-}
+} */
 
 
 /* NEW TASK CSS */
@@ -362,27 +383,19 @@ select {
     flex: 2;
 }
 
-.select-delete-category .delete-btn, 
-.new-category .add-btn {
-    flex: 1;
-    align-items: center;
-    /* justify-content: center; */
-    margin: 0 5px;
-    padding: 5px 35px;
-    height: 50px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.category-section .delete-btn {
+.select-delete-category .delete-btn {
     background: #ff6666;
-    padding: 5px 20px;
-    /* height: auto; */
+    padding: 1px 20px;
+    margin: 0 5px;
+    padding: 10px 20px;
 }
 
-.category-section .add-btn {
+.new-category .add-btn {
     background: #66cc66;
+    padding: 10px 20px;
+    /* height: 40px; */
+    margin: 0 5px;
+
 }
 
 .category-colors {
@@ -411,41 +424,23 @@ select {
 }
 
 .selected-category {
-    /* display: flex; */
+    width: 100%;
+}
+
+.category {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
     width: 100%;
 }
 
 .select-delete-category, 
 .new-category {
     display: flex;
+    align-items: center ;
     flex-direction: row;
-    width: 100%
-
+    width: 100%;
 }
-
-/* 
-.action-buttons {
-    display: flex;
-    justify-content: space-between;
-} */
-/* 
-.action-buttons .cancel-btn, 
-.action-buttons .create-btn {
-    flex: 1;
-    margin: 0 5px;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-} */
-
-/* .action-buttons .cancel-btn {
-    background: #ff6666;
-} */
-
-/* .action-buttons .create-btn {
-    background: #66cc66;
-} */
 
 .btn-addTask {
     background-color: #00BF63;
@@ -479,8 +474,13 @@ select {
 }
 
 .cancel-btn {
-    background-color: #D24545;
+    background-color: gray;
 }
+
+.saveButton {
+    background-color: #00BF63;
+}
+
 .createTask-btn {
     background-color: #00BF63;
 }
@@ -553,12 +553,13 @@ select {
 
 .low-priority {
     background-color: #01da01;
-    border-radius: 10px;
+    border-radius: 30px;
     width: 100px;
     text-align: center;
     color: white;
-    font-weight: 400;
-    padding: 5px 10px;
+    font-weight: 500;
+    padding: 5px 20px;
+    font-size: 15px;
 }
 
 .medium-priority {
@@ -569,6 +570,7 @@ select {
     color: white;
     font-weight: 400;
     padding: 5px 10px;
+    font-size: 15px;
 }
 
 .high-priority {
@@ -578,6 +580,7 @@ select {
     width: 100px;
     text-align: center;
     padding: 5px 10px;
+    font-size: 15px;
 }
 
 .btn-container {
@@ -585,7 +588,7 @@ select {
     justify-content: space-between;
 }
 
-.task-item .bottom {
+.task-details .bottom {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -598,7 +601,7 @@ select {
 }
 
 button {
-    background-color: #007bff;
+    /* background-color: #007bff; */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -606,10 +609,10 @@ button {
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
+/* 
 button:hover {
     background-color: #0056b3;
-}
+} */
 
 .empty {
     display: flex;
@@ -638,34 +641,17 @@ button:hover {
 }
 
 .settings-section .chat:hover,
-.settings-section .report:hover,
-.settings-section .logout:hover {
+.settings-section .report:hover {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     font-weight: 500;
 }
 
-.settings-section hr {
+hr {
     opacity: rgba(0, 0, 0, 0.1);
     margin-top: 50px;
     margin-bottom: 50px;
 }
-.settings-section .logout {
-    background-color: #D24545;
-    color: #fff;
-    text-align: center;
-    width: 30%;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    padding: 15px;
-    margin: 0 auto;
-}
 
-.settings-section p {
-    color: rgb(0, 0, 0, 0.5);
-    font-size: 14px;
-    text-align: center;
-    margin-top: 5em;
-}
 
 /* LANDINGPAGE */
 
@@ -685,7 +671,7 @@ button:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 30px;
+    padding: 15px 50px;
     background-color: #f5f5f5;
 }
 
@@ -696,15 +682,28 @@ button:hover {
 }
 
 .nav-links a {
-    color: black;
+    /* color: black; */
     text-decoration: none;
 }
 
-.get-started-btn, .get-app-btn {
+.log-in-link:hover {
+    font-weight: 500;
+}
+
+.get-app-btn {
     background-color: #00BF63;
     color: white;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 10px 50px;
+    border-radius: 20px;
+    text-decoration: none;
+    margin-top: 30px;
+}
+
+.get-started-btn {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 50px;
+    border-radius: 20px;
     text-decoration: none;
     margin-top: 30px;
 }
@@ -712,7 +711,7 @@ button:hover {
 .get-started-btn:hover,
 .get-app-btn:hover {
     color: #fff;
-
+    font-weight: 600;
 }
 
 .App-header {
@@ -765,4 +764,160 @@ button:hover {
 
 .get-started-button:hover {
     background-color: #0056b3;
+}
+
+
+/* PROFILE */
+
+/* .floatable-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 500px;
+    z-index: 1050;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+
+} */
+
+
+.profileContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3em;   
+}
+
+.selectProfilePhoto {
+    /* background-color: gray; */
+    border-radius: 150px;   
+}
+
+.profileImage {
+    width: 200px;   
+    height: auto;
+    cursor: pointer;
+}
+
+.greetings {
+    font-size: 48px;
+    /* font-family: Poppins; */
+    font-weight: 400;
+    letter-spacing: 0%;
+}
+
+.accountInfoContainer .updatebtn-container  {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.updateButton {
+    background-color: #00BF63;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+
+.accountInfoContainer .sectionHeader {
+    font-weight: 500;
+    font-size: 16px;
+    padding: 20px 0;   
+}
+
+.accountInfoContainer .displayInfo {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    margin-bottom: 20px;
+}
+
+.displayInfo .label {
+    color: #2ECC71;
+    font-weight: 700;
+}
+
+.profile-section .logout {
+    background-color: #D24545;
+    color: #fff;
+    text-align: center;
+    width: 30%;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.profile-section .logout:hover {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+}
+
+.profile-section .credit {
+    color: rgb(0, 0, 0, 0.5);
+    font-size: 14px;
+    text-align: center;
+    margin-top: 5em;
+}
+
+.information-actions {
+    display: flex;
+    flex-direction: row;
+    /* width: 100%; */
+    /* justify-content: space-around; */
+    align-items: stretch;
+    padding: 20px;
+}
+
+.accountInfoContainer, .editProfileContainer{
+    flex: 65%;
+    padding: 20px;
+}
+
+.accountInfoContainer .textInput-readonly {
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    border-radius: 5px;
+    background-color: #F5F5F5;
+}
+
+.actionsContainer {
+    flex: 35%;
+    padding: 20px;
+}
+
+.information-actions .editProfile-btn {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2em;
+}
+
+.actions-list {
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 25px 20px;
+    margin-top: 20px;
+}
+
+.actionsContainer .actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1em;
+    cursor: pointer;
+}
+
+.actionsContainer .actions-line {
+    width: 100%;
+    margin: 0;
+    padding: 0
 }

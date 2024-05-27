@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import { MdDelete, MdEdit } from "react-icons/md";
-
 import '../config/style.css';
 import empty from '../assets/Empty.png';
 

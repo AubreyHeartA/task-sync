@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap"; // Import Button from react-bootstrap
+import { Button } from "react-bootstrap";
 import { MdOutlineMessage, MdOutlineReportGmailerrorred } from "react-icons/md";
 
 import profile from '../assets/TaskSync1.png';
 import '../config/style.css';
 
-const Profile = ({ navigation }) => {
+const Profile = ({ navigation, setProfilePhoto }) => {
     const [isEditMode, setIsEditMode] = useState(false);
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [email, setEmail] = useState("");
-    const [profilePhoto, setProfilePhoto] = useState(null);
+    const [profilePhoto, setLocalProfilePhoto] = useState(null);
 
     useEffect(() => {
         loadUserData();
@@ -26,7 +26,7 @@ const Profile = ({ navigation }) => {
                 setEmail(userCredentials.email);
             }
             if (profilePhotoUri) {
-                setProfilePhoto(profilePhotoUri);
+                setLocalProfilePhoto(profilePhotoUri);
             }
         } catch (e) {
             console.error('Error loading user data:', e);
@@ -45,6 +45,7 @@ const Profile = ({ navigation }) => {
             }));
             localStorage.setItem('profilePhoto', profilePhoto || '');
 
+            setProfilePhoto(profilePhoto || '');
             setIsEditMode(false);
             alert('Profile Updated', 'Your profile has been successfully updated.');
         } catch (error) {
@@ -57,6 +58,7 @@ const Profile = ({ navigation }) => {
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
+                setLocalProfilePhoto(reader.result);
                 setProfilePhoto(reader.result);
             };
             reader.readAsDataURL(file);

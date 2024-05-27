@@ -10,7 +10,7 @@ import Settings from '../sections/Settings';
 import LandingPage from '../components/LandingPage';
 import Login from './Login';
 import Signup from './Signup';
-import Profile from  '../sections/Profile';
+import Profile from '../sections/Profile';
 
 const App = () => {
     const [selectedItem, setSelectedItem] = useState(null);
@@ -19,8 +19,8 @@ const App = () => {
     const [isLogin, setIsLogin] = useState(true);
     const [isLandingPage, setIsLandingPage] = useState(true);
     const [taskDetails, setTaskDetails] = useState([]);
+    const [profilePhoto, setProfilePhoto] = useState(null);
 
-    
     const handleItemClick = (item) => {
         setSelectedItem(item);
     };
@@ -61,7 +61,11 @@ const App = () => {
         if (savedTasks) {
             setTaskDetails(savedTasks);
         }
-    }, []); 
+        const profilePhotoUri = localStorage.getItem('profilePhoto');
+        if (profilePhotoUri) {
+            setProfilePhoto(profilePhotoUri);
+        }
+    }, []);
 
     useEffect(() => {
         if (isAuthenticated && !selectedItem) {
@@ -86,14 +90,6 @@ const App = () => {
         );
     }
 
-        
-    // const countTasksByStatus = (status) => {
-    //     return taskDetails.filter(task => task.status === status).length;
-    // };
-
-    // const ongoingTasks = countTasksByStatus('Pending');
-    // const completedTasks = countTasksByStatus('Completed');
-
     const sidebarItems = [
         { label: 'Dashboard', icon: <MdHome /> },
         { label: 'Tasks', icon: <MdInfo /> },
@@ -102,7 +98,12 @@ const App = () => {
 
     return (
         <div className="body">
-            <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} onProfileClick={handleProfileClick}  />
+            <Header 
+                searchTerm={searchTerm} 
+                setSearchTerm={setSearchTerm} 
+                onProfileClick={handleProfileClick} 
+                profilePhoto={profilePhoto} 
+            />
             <div className="main">
                 <Sidebar
                     items={sidebarItems}
@@ -110,10 +111,10 @@ const App = () => {
                     selectedItem={selectedItem}
                 />
                 <div className="article">
-                    {selectedItem === 'Dashboard' && <Dashboard taskDetails={taskDetails}  />}
-                    {selectedItem === 'Tasks' && <Task searchTerm={searchTerm} taskDetails={taskDetails} setTaskDetails={setTaskDetails}  />}
+                    {selectedItem === 'Dashboard' && <Dashboard taskDetails={taskDetails} />}
+                    {selectedItem === 'Tasks' && <Task searchTerm={searchTerm} taskDetails={taskDetails} setTaskDetails={setTaskDetails} />}
                     {selectedItem === 'Settings' && <Settings onLogout={handleLogout} />}
-                    {selectedItem === 'Profile' && <Profile/>}
+                    {selectedItem === 'Profile' && <Profile setProfilePhoto={setProfilePhoto} />}
                 </div>
             </div>
         </div>

@@ -164,7 +164,6 @@ export default function Task({ searchTerm, taskDetails, setTaskDetails }) {
                     ) : (
                         <div className='empty'>
                             <img className='empty-image' src={empty} alt="No tasks available" />
-                            <p>No tasks available.</p>
                         </div>
                     )}
                 </>

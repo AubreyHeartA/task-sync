@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';a
 import logo from '../assets/TaskSync1.png';
 import '../config/style.css';
 
@@ -63,7 +63,7 @@ const Login = ({ onSwitchToSignup, onLogin }) => {
                     </div>
                     <button type="submit" className="btn-login">Login</button>
                     <div className="signup-link">
-                        <p>Don't have an account? <a className="signup-link-btn" onClick={onSwitchToSignup}>Sign Up</a></p>
+                        <p>Don't have an account? <a href="#sign-up"className="signup-link-btn" onClick={onSwitchToSignup}>Sign Up</a></p>
                     </div>
                 </form>
             </div>

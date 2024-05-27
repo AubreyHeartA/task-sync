@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 import logo from '../assets/TaskSync1.png';
 import '../config/style.css';
 
@@ -88,7 +88,7 @@ export default function Signup({ onSwitchToLogin }) {
                     </div>
                     <button type="submit" className="btn-signup">Sign Up</button>
                     <div className="login-link">
-                        <p>Already have an account? <a className="login-link-btn" onClick={onSwitchToLogin}>Login</a></p>
+                        <p>Already have an account? <a href="#sign-up" className="login-link-btn" onClick={onSwitchToLogin}>Login</a></p>
                     </div>
                 </form>
             </div>

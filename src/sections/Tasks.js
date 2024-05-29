@@ -145,7 +145,7 @@ export default function Task({ searchTerm, taskDetails, setTaskDetails }) {
                                         <div className="task-details">
                                             <h3>{task.title}</h3>
                                             <p>{task.description}</p>
-                                            <p className='red-color'>Due Date: {task.dueDate} {task.dueTime}</p>
+                                            <p className='red-color'>Deadline: {task.dueDate} {task.dueTime}</p>
                                             <p>Member: {task.member}</p>
                                             <div className='bottom'>
                                                 <h4 className={getPriorityClass(task.priority)}>{task.priority}</h4>

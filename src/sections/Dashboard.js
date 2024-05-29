@@ -15,7 +15,7 @@ export default function Dashboard({ taskDetails }) {
                 <div className='task-count pending'>
                     <FiCheckCircle size={30} color="white" className='taskIcon' />
                     <h3>Pending Tasks</h3>
-                    <p className='number-count'><span>{completedTasksCount}</span> Tasks</p>
+                    <p className='number-count'><span>{pendingTasksCount}</span> Tasks</p>
                 </div>
 
                 <div className='task-count completed'>

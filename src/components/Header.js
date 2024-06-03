@@ -19,7 +19,7 @@ export default function Header({ searchTerm, setSearchTerm, onProfileClick, prof
                 <input
                     className="search"
                     type="text"
-                    placeholder="Search tasks, members, projects"
+                    placeholder="Search tasks, members"
                     value={searchTerm}
                     onChange={handleSearch}
                 />

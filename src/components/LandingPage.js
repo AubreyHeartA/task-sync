@@ -18,7 +18,7 @@ function LandingPage({ onSwitchToLogin, onSwitchToSignup }) {
                 </div>
                 <ul className="nav-links">
                     {/* <li><a className="log-in-link" href="#login" onClick={onSwitchToLogin}>Log In</a></li> */}
-                    <li><a className="get-started-btn" href="#get-started" onClick={onSwitchToSignup}>Get Started</a></li>
+                    {/* <li><a className="get-started-btn" href="#get-started" onClick={onSwitchToSignup}>Get Started</a></li> */}
                     {/* <li><a className="get-app-btn" href="#get-app" onClick={getApp}>Get App</a></li> */}
                 </ul>
             </nav>

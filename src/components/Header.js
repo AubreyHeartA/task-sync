@@ -9,9 +9,9 @@ export default function Header({ searchTerm, setSearchTerm, onProfileClick, prof
         setSearchTerm(event.target.value);
     };
 
-    const getApp = () => {
-        window.open("https://www.mediafire.com/file/9qmqxp2up7tjbv4/TaskSync.apk/file", "_blank").focus();
-    };
+    // const getApp = () => {
+    //     window.open("https://www.mediafire.com/file/9qmqxp2up7tjbv4/TaskSync.apk/file", "_blank").focus();
+    // };
 
     return (
         <div className="header">
@@ -26,7 +26,7 @@ export default function Header({ searchTerm, setSearchTerm, onProfileClick, prof
                 <Button className="btn-search">Search</Button>
             </div>
             <div className='left'> 
-                <a className="getApp" href="#get-app" onClick={getApp}>Get App</a>
+                {/* <a className="getApp" href="#get-app" onClick={getApp}>Get App</a> */}
                 {profilePhoto ? (
                     <img 
                         src={profilePhoto} 

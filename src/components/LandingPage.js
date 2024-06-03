@@ -27,7 +27,7 @@ function LandingPage({ onSwitchToLogin, onSwitchToSignup }) {
                     <h1>Collaboration and Organization</h1>
                     <p>Unlock the power of collaboration and organization with our platform, designed to 
                     seamlessly bring teams together, streamline workflows, and achieve extraordinary results</p>
-                    <button className="get-started-button" onClick={onSwitchToSignup}>Get Started</button>
+                    <button className="get-started-button" onClick={onSwitchToLogin}>Login</button>
                 </div>
                 <div className="header-image">
                     <img className='photo' src={photo} alt="Calendar and Hourglass" />

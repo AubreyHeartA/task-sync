@@ -71,12 +71,12 @@ export default function Dashboard({ taskDetails }) {
 }
 
 const Members = ({ onHomeClick }) => {
-    const [members, setMembers] = useState([
+    const members = [
         { id: '2021306843', name: 'Aubrey Heart Arian' },
         { id: '2021300664', name: 'Clarice Domingo' },
         { id: '2021302305', name: 'Dominic Daculiat' },
         { id: '2021305542', name: 'Zairyl Mae Patosa' },
-    ]);
+    ];
 
     useEffect(() => {
         const addInitialMembers = async () => {
@@ -93,7 +93,7 @@ const Members = ({ onHomeClick }) => {
         };
 
         addInitialMembers();
-    }, [members]);
+    }, []);
 
     return (
         <div className='members-container'>

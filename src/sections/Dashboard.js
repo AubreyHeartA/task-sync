@@ -93,7 +93,7 @@ const Members = ({ onHomeClick }) => {
         };
 
         addInitialMembers();
-    }, []);
+    }, [members]);
 
     return (
         <div className='members-container'>

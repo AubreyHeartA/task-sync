@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import { FiCheckCircle, FiClock } from 'react-icons/fi';
+import { firestore } from '../firebase';
+import { collection, addDoc, getDocs, query, where } from 'firebase/firestore';
 import '../config/style.css';
 
 export default function Dashboard({ taskDetails }) {
@@ -69,12 +71,30 @@ export default function Dashboard({ taskDetails }) {
 }
 
 const Members = ({ onHomeClick }) => {
-    const members = [
+    const [members, setMembers] = useState([
         { id: '2021306843', name: 'Aubrey Heart Arian' },
         { id: '2021300664', name: 'Clarice Domingo' },
         { id: '2021302305', name: 'Dominic Daculiat' },
         { id: '2021305542', name: 'Zairyl Mae Patosa' },
-    ]
+    ]);
+
+    useEffect(() => {
+        const addInitialMembers = async () => {
+            const membersCollection = collection(firestore, 'members');
+
+            for (const member of members) {
+                const memberQuery = query(membersCollection, where('id', '==', member.id));
+                const querySnapshot = await getDocs(memberQuery);
+
+                if (querySnapshot.empty) {
+                    await addDoc(membersCollection, member);
+                }
+            }
+        };
+
+        addInitialMembers();
+    }, [members]);
+
     return (
         <div className='members-container'>
             <Table className='table'>
@@ -85,26 +105,10 @@ const Members = ({ onHomeClick }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {/* <tr>
-                        <td>2021306843</td>
-                        <td>Aubrey Heart Arian</td>
-                    </tr>
-                    <tr>
-                        <td>2021300664</td>
-                        <td>Clarice Domingo</td>
-                    </tr>
-                    <tr>
-                        <td>2021302305</td>
-                        <td>Dominic Daculiat</td>
-                    </tr>
-                    <tr>
-                        <td>2021305542</td>
-                        <td>Zairyl Mae Patosa</td>
-                    </tr> */}
                     {members.map((member, index) => (
                         <tr key={index}>
-                        <td>{member.id}</td>
-                        <td>{member.name}</td>
+                            <td>{member.id}</td>
+                            <td>{member.name}</td>
                         </tr>
                     ))}
                 </tbody>

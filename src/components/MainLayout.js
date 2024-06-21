@@ -51,10 +51,10 @@ const App = () => {
         setIsLandingPage(false);
     };
 
-    const handleLogout = () => {
-        setIsAuthenticated(false);
-        setIsLandingPage(true);
-    };
+    // const handleLogout = () => {
+    //     setIsAuthenticated(false);
+    //     setIsLandingPage(true);
+    // };
 
     useEffect(() => {
         const savedTasks = JSON.parse(localStorage.getItem('tasks'));

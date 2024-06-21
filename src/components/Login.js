@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-// import Button from 'react-bootstrap/Button';a
+import { auth, firestore } from '../firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { getDoc, doc } from 'firebase/firestore';
 import logo from '../assets/TaskSync1.png';
 import '../config/style.css';
 
@@ -8,13 +10,24 @@ const Login = ({ onSwitchToSignup, onLogin }) => {
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        const userCredentials = JSON.parse(localStorage.getItem('userCredentials'));
-        if (userCredentials && userCredentials.email === email && userCredentials.password === password) {
-            onLogin();
-        } else {
-            alert('Invalid email or password');
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+            const userDoc = await getDoc(doc(firestore, 'users', user.uid));
+            if (userDoc.exists()) {
+                const userData = userDoc.data();
+                console.log('User data:', userData); // Display user data in console
+                if (rememberMe) {
+                    localStorage.setItem('userEmail', email);
+                }
+                onLogin();
+            } else {
+                alert('User data not found');
+            }
+        } catch (error) {
+            alert('Invalid email or password: ' + error.message);
         }
     };
 
@@ -34,36 +47,36 @@ const Login = ({ onSwitchToSignup, onLogin }) => {
                     </div>
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            value={email} 
-                            onChange={(e) => setEmail(e.target.value)} 
-                            required 
+                        <input
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
                         />
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
-                        <input 
-                            type="password" 
-                            id="password" 
-                            value={password} 
-                            onChange={(e) => setPassword(e.target.value)} 
-                            required 
+                        <input
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
                         />
                     </div>
                     <div className="form-group remember-me">
-                        <input 
-                            type="checkbox" 
-                            id="rememberMe" 
-                            checked={rememberMe} 
-                            onChange={(e) => setRememberMe(e.target.checked)} 
+                        <input
+                            type="checkbox"
+                            id="rememberMe"
+                            checked={rememberMe}
+                            onChange={(e) => setRememberMe(e.target.checked)}
                         />
                         <label htmlFor="rememberMe">Remember Me</label>
                     </div>
                     <button type="submit" className="btn-login">Login</button>
                     <div className="signup-link">
-                        <p>Don't have an account? <a href="#sign-up"className="signup-link-btn" onClick={onSwitchToSignup}>Sign Up</a></p>
+                        <p>Don't have an account? <a href="#sign-up" className="signup-link-btn" onClick={onSwitchToSignup}>Sign Up</a></p>
                     </div>
                 </form>
             </div>
@@ -72,4 +85,3 @@ const Login = ({ onSwitchToSignup, onLogin }) => {
 };
 
 export default Login;
-

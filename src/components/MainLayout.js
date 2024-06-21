@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { MdHome, MdInfo, MdSettings } from 'react-icons/md';
+import { MdAccountCircle, MdHome, MdInfo } from 'react-icons/md';
 
 import '../config/style.css';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Dashboard from '../sections/Dashboard';
 import Task from '../sections/Tasks';
-import Settings from '../sections/Settings';
+// import Settings from '../sections/Settings';
 import LandingPage from '../components/LandingPage';
 import Login from './Login';
 import Signup from './Signup';
@@ -93,7 +93,7 @@ const App = () => {
     const sidebarItems = [
         { label: 'Dashboard', icon: <MdHome /> },
         { label: 'Tasks', icon: <MdInfo /> },
-        { label: 'Settings', icon: <MdSettings /> },
+        { label: 'Profile', icon: <MdAccountCircle /> },
     ];
 
     return (
@@ -113,7 +113,7 @@ const App = () => {
                 <div className="article">
                     {selectedItem === 'Dashboard' && <Dashboard taskDetails={taskDetails} />}
                     {selectedItem === 'Tasks' && <Task searchTerm={searchTerm} taskDetails={taskDetails} setTaskDetails={setTaskDetails} />}
-                    {selectedItem === 'Settings' && <Settings onLogout={handleLogout} />}
+                    {/* {selectedItem === 'Settings' && <Settings onLogout={handleLogout} />} */}
                     {selectedItem === 'Profile' && <Profile setProfilePhoto={setProfilePhoto} />}
                 </div>
             </div>

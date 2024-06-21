@@ -1,53 +1,55 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { MdOutlineMessage, MdOutlineReportGmailerrorred } from "react-icons/md";
+import { auth, firestore } from '../firebase';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 
 import profile from '../assets/TaskSync1.png';
 import '../config/style.css';
 
-const Profile = ({ navigation, setProfilePhoto }) => {
+const Profile = ({ navigation }) => {
     const [isEditMode, setIsEditMode] = useState(false);
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [email, setEmail] = useState("");
-    const [profilePhoto, setLocalProfilePhoto] = useState(null);
+    const [profilePhoto, setProfilePhoto] = useState(null);
 
     useEffect(() => {
         loadUserData();
     }, []);
 
-    const loadUserData = () => {
+    const loadUserData = async () => {
         try {
-            const userCredentials = JSON.parse(localStorage.getItem('userCredentials'));
-            const profilePhotoUri = localStorage.getItem('profilePhoto');
-            if (userCredentials) {
-                setFirstname(userCredentials.firstname);
-                setLastname(userCredentials.lastname);
-                setEmail(userCredentials.email);
-            }
-            if (profilePhotoUri) {
-                setLocalProfilePhoto(profilePhotoUri);
+            const user = auth.currentUser;
+            if (user) {
+                const userDoc = await getDoc(doc(firestore, 'users', user.uid));
+                const userData = userDoc.data();
+                if (userData) {
+                    setFirstname(userData.firstname);
+                    setLastname(userData.lastname);
+                    setEmail(userData.email);
+                    setProfilePhoto(userData.profilePhoto || profile); // Default profile photo if none is set
+                }
             }
         } catch (e) {
             console.error('Error loading user data:', e);
         }
     };
 
-    const saveChanges = (e) => {
+    const saveChanges = async (e) => {
         e.preventDefault();
         try {
-            const userCredentials = JSON.parse(localStorage.getItem('userCredentials'));
-            localStorage.setItem('userCredentials', JSON.stringify({
-                firstname,
-                lastname,
-                email,
-                password: userCredentials.password,
-            }));
-            localStorage.setItem('profilePhoto', profilePhoto || '');
-
-            setProfilePhoto(profilePhoto || '');
-            setIsEditMode(false);
-            alert('Profile Updated', 'Your profile has been successfully updated.');
+            const user = auth.currentUser;
+            if (user) {
+                await updateDoc(doc(firestore, 'users', user.uid), {
+                    firstname,
+                    lastname,
+                    email,
+                    profilePhoto
+                });
+                setIsEditMode(false);
+                alert('Profile Updated', 'Your profile has been successfully updated.');
+            }
         } catch (error) {
             console.error('Error updating profile:', error);
         }
@@ -58,7 +60,6 @@ const Profile = ({ navigation, setProfilePhoto }) => {
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                setLocalProfilePhoto(reader.result);
                 setProfilePhoto(reader.result);
             };
             reader.readAsDataURL(file);
@@ -75,7 +76,7 @@ const Profile = ({ navigation, setProfilePhoto }) => {
 
     const handleLogout = () => {
         try {
-            localStorage.removeItem('userToken');
+            auth.signOut();
             navigation.replace('Login');
         } catch (error) {
             alert('Error', 'An error occurred during logout');

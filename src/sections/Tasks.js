@@ -1,6 +1,9 @@
+// Task.js
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import { MdDelete, MdEdit } from "react-icons/md";
+import { firestore } from '../firebase';
+import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc } from 'firebase/firestore';
 import '../config/style.css';
 import empty from '../assets/Empty.png';
 
@@ -11,10 +14,12 @@ export default function Task({ searchTerm, taskDetails, setTaskDetails }) {
     const [selectedCategory, setSelectedCategory] = useState('All');
 
     useEffect(() => {
-        const savedTasks = JSON.parse(localStorage.getItem('tasks'));
-        if (savedTasks) {
-            setTaskDetails(savedTasks);
-        }
+        const fetchTasks = async () => {
+            const tasksSnapshot = await getDocs(collection(firestore, 'tasks'));
+            const tasksList = tasksSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            setTaskDetails(tasksList);
+        };
+        fetchTasks();
     }, [setTaskDetails]);
 
     const handleAddTaskClick = () => {
@@ -26,44 +31,42 @@ export default function Task({ searchTerm, taskDetails, setTaskDetails }) {
         setEditTask(null);
     };
 
-    const handleCreateTask = (newTask) => {
-        let updatedTasks;
+    const handleCreateTask = async (newTask) => {
         if (editTask !== null) {
-            updatedTasks = taskDetails.map((task, index) =>
-                index === editTask ? newTask : task
-            );
+            const taskDoc = doc(firestore, 'tasks', editTask);
+            await updateDoc(taskDoc, newTask);
         } else {
-            updatedTasks = [...taskDetails, newTask];
+            await addDoc(collection(firestore, 'tasks'), newTask);
         }
-        setTaskDetails(updatedTasks);
-        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+        const tasksSnapshot = await getDocs(collection(firestore, 'tasks'));
+        const tasksList = tasksSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setTaskDetails(tasksList);
         setShowNewTask(false);
         setEditTask(null);
     };
 
-    const handleDeleteTask = (index) => {
-        const updatedTasks = taskDetails.filter((_, i) => i !== index);
-        setTaskDetails(updatedTasks);
-        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
-        if (selectedCategory !== 'All' && !updatedTasks.some(task => task.category === selectedCategory)) {
+    const handleDeleteTask = async (taskId) => {
+        await deleteDoc(doc(firestore, 'tasks', taskId));
+        const tasksSnapshot = await getDocs(collection(firestore, 'tasks'));
+        const tasksList = tasksSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setTaskDetails(tasksList);
+        if (selectedCategory !== 'All' && !tasksList.some(task => task.category === selectedCategory)) {
             setSelectedCategory('All');
         }
     };
 
-    const handleEditTask = (index) => {
-        setEditTask(index);
+    const handleEditTask = (taskId) => {
+        setEditTask(taskId);
         setShowNewTask(true);
     };
 
-    const handleToggleTaskStatus = (index) => {
-        const updatedTasks = taskDetails.map((task, i) => {
-            if (i === index) {
-                return { ...task, status: task.status === 'Pending' ? 'Completed' : 'Pending' };
-            }
-            return task;
-        });
-        setTaskDetails(updatedTasks);
-        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+    const handleToggleTaskStatus = async (taskId) => {
+        const task = taskDetails.find(task => task.id === taskId);
+        const taskDoc = doc(firestore, 'tasks', taskId);
+        await updateDoc(taskDoc, { status: task.status === 'Pending' ? 'Completed' : 'Pending' });
+        const tasksSnapshot = await getDocs(collection(firestore, 'tasks'));
+        const tasksList = tasksSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setTaskDetails(tasksList);
     };
 
     const handleFilterChange = (e) => {
@@ -101,7 +104,7 @@ export default function Task({ searchTerm, taskDetails, setTaskDetails }) {
 
     const filteredTasks = taskDetails.filter(task => 
         (filter === 'All' || task.status === filter) &&
-        (selectedCategory === 'All' || task.category === selectedCategory)  &&
+        (selectedCategory === 'All' || task.category === selectedCategory) &&
         (task.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
          task.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
          task.member.toLowerCase().includes(searchTerm.toLowerCase()))
@@ -140,7 +143,7 @@ export default function Task({ searchTerm, taskDetails, setTaskDetails }) {
                                         <input 
                                             type="checkbox" 
                                             checked={task.status === 'Completed'} 
-                                            onChange={() => handleToggleTaskStatus(index)} 
+                                            onChange={() => handleToggleTaskStatus(task.id)} 
                                         />
                                         <div className="task-details">
                                             <h3>{task.title}</h3>
@@ -153,8 +156,8 @@ export default function Task({ searchTerm, taskDetails, setTaskDetails }) {
                                             </div>
                                         </div>
                                         <div className="task-actions">
-                                            <MdEdit onClick={() => handleEditTask(index)} />
-                                            <MdDelete onClick={() => handleDeleteTask(index)} />
+                                            <MdEdit onClick={() => handleEditTask(task.id)} />
+                                            <MdDelete onClick={() => handleDeleteTask(task.id)} />
                                         </div>
                                     </div>
                                 ))}
@@ -167,7 +170,7 @@ export default function Task({ searchTerm, taskDetails, setTaskDetails }) {
                     )}
                 </>
             )}
-            {showNewTask && <NewTask onCancel={handleCancel} onCreate={handleCreateTask} editTask={editTask !== null ? taskDetails[editTask] : null} />}
+            {showNewTask && <NewTask onCancel={handleCancel} onCreate={handleCreateTask} editTask={editTask !== null ? taskDetails.find(task => task.id === editTask) : null} />}
         </div>
     );
 };
@@ -185,15 +188,13 @@ const NewTask = ({ onCancel, onCreate, editTask }) => {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        const savedCategories = JSON.parse(localStorage.getItem('categories'));
-        if (savedCategories) {
-            setCategories(savedCategories);
-        }
+        const fetchCategories = async () => {
+            const categoriesSnapshot = await getDocs(collection(firestore, 'categories'));
+            const categoriesList = categoriesSnapshot.docs.map(doc => doc.data().name);
+            setCategories(categoriesList);
+        };
+        fetchCategories();
     }, []);
-
-    useEffect(() => {
-        localStorage.setItem('categories', JSON.stringify(categories));
-    }, [categories]);
 
     const handleCreate = async () => {
         // Validation
@@ -217,21 +218,21 @@ const NewTask = ({ onCancel, onCreate, editTask }) => {
         onCreate(newTask);
     };
 
-    const handleAddCategory = () => {
+    const handleAddCategory = async () => {
         if (newCategory && !categories.includes(newCategory)) {
-            const updatedCategories = [...categories, newCategory];
-            setCategories(updatedCategories);
+            await addDoc(collection(firestore, 'categories'), { name: newCategory });
+            setCategories([...categories, newCategory]);
             setCategory(newCategory);
             setNewCategory('');
-            localStorage.setItem('categories', JSON.stringify(updatedCategories)); // Save categories to local storage
         }
     };
 
-    const handleDeleteCategory = () => {
+    const handleDeleteCategory = async () => {
+        const categoryDoc = doc(firestore, 'categories', category);
+        await deleteDoc(categoryDoc);
         const updatedCategories = categories.filter(cat => cat !== category);
         setCategories(updatedCategories);
         setCategory('');
-        localStorage.setItem('categories', JSON.stringify(updatedCategories)); // Save categories to local storage
     };
 
     const handleCategorySelect = (e) => {

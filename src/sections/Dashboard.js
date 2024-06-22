@@ -6,7 +6,7 @@ import { collection, addDoc, getDocs, query, where } from 'firebase/firestore';
 import '../config/style.css';
 
 export default function Dashboard({ taskDetails }) {
-    // const [showMembers, setShowMembers] = useState(false);
+    const [showMembers, setShowMembers] = useState(false);
 
     const completedTasksCount = taskDetails.filter(task => task.status === 'Completed').length;
     const pendingTasksCount = taskDetails.filter(task => task.status === 'Pending').length;

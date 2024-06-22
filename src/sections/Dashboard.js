@@ -11,9 +11,9 @@ export default function Dashboard({ taskDetails }) {
     const completedTasksCount = taskDetails.filter(task => task.status === 'Completed').length;
     const pendingTasksCount = taskDetails.filter(task => task.status === 'Pending').length;
 
-    // const handleShowMembers = () => {
-    //     setShowMembers(true);
-    // };
+    const handleShowMembers = () => {
+        setShowMembers(true);
+    };
 
     const handleShowTasks = () => {
         setShowMembers(false);
@@ -60,9 +60,9 @@ export default function Dashboard({ taskDetails }) {
                         )}
                     </div>
                     
-                    {/* <div className='memberButtonContainer' onClick={handleShowMembers}>
+                    <div className='memberButtonContainer' onClick={handleShowMembers}>
                         <button className='memberButton'>Click here to see Team's Info</button>                    
-                    </div> */}
+                    </div>
 
                 </>
             )}
@@ -72,10 +72,10 @@ export default function Dashboard({ taskDetails }) {
 
 const Members = ({ onHomeClick }) => {
     const [members] = useState([
-        { id: '2021306843', name: 'Aubrey Heart Arian' },
-        { id: '2021300664', name: 'Clarice Domingo' },
-        { id: '2021302305', name: 'Dominic Daculiat' },
-        { id: '2021305542', name: 'Zairyl Mae Patosa' },
+        { id: 1, course: 'BSIT', firstname: 'Aubrey Heart', lastname: 'Arian'},
+        { id: 2,course: 'BSIT', firstname: 'Clarice', lastname: 'Domingo' },
+        { id: 3, course: 'BSIT', firstname: 'Dominic', lastname: 'Daculiat' },
+        { id: 4, course: 'BSIT', firstname: 'Zairyl Mae', lastname: 'Patosa'},
     ]);
 
     useEffect(() => {
@@ -100,15 +100,19 @@ const Members = ({ onHomeClick }) => {
             <Table className='table'>
                 <thead>
                     <tr>
-                        <th>Student ID</th>
-                        <th>Name</th>
+                        <th>id</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Course</th>
                     </tr>
                 </thead>
                 <tbody>
                     {members.map((member, index) => (
                         <tr key={index}>
                             <td>{member.id}</td>
-                            <td>{member.name}</td>
+                            <td>{member.firstname}</td>
+                            <td>{member.lastname}</td>
+                            <td>{member.course}</td>
                         </tr>
                     ))}
                 </tbody>

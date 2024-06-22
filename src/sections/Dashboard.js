@@ -11,9 +11,9 @@ export default function Dashboard({ taskDetails }) {
     const completedTasksCount = taskDetails.filter(task => task.status === 'Completed').length;
     const pendingTasksCount = taskDetails.filter(task => task.status === 'Pending').length;
 
-    const handleShowMembers = () => {
-        setShowMembers(true);
-    };
+    // const handleShowMembers = () => {
+    //     setShowMembers(true);
+    // };
 
     const handleShowTasks = () => {
         setShowMembers(false);
@@ -60,9 +60,9 @@ export default function Dashboard({ taskDetails }) {
                         )}
                     </div>
                     
-                    <div className='memberButtonContainer' onClick={handleShowMembers}>
+                    {/* <div className='memberButtonContainer' onClick={handleShowMembers}>
                         <button className='memberButton'>Click here to see Team's Info</button>                    
-                    </div>
+                    </div> */}
 
                 </>
             )}
